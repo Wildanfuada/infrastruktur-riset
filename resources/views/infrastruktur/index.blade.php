@@ -91,7 +91,6 @@
                 <td>
                     <div class="actions">
                         <a href="{{ route('infrastruktur.edit', $item->id) }}" class="btn btn-edit">Edit</a>
-                        
                         <form action="{{ route('infrastruktur.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                             @csrf
                             @method('DELETE')

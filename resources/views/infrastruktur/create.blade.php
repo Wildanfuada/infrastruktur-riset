@@ -56,9 +56,8 @@
 
         <div class="form-group">
             <label for="biaya_pengujian" class="required">Biaya Pengujian</label>
-            <input type="text" id="biaya_pengujian" name="biaya_pengujian" 
-                   placeholder="Contoh: Rp 1.000.000"
-                   value="{{ old('biaya_pengujian') }}">
+            <textarea id="biaya_pengujian" name="biaya_pengujian" 
+                   placeholder="Contoh: Rp 1.000.000">{{ old('biaya_pengujian') }}</textarea>
         </div>
 
         <div class="form-group">
