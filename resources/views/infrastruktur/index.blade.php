@@ -8,6 +8,54 @@
 
     <a href="{{ route('infrastruktur.create') }}" class="btn-add">+ Tambah Data</a>
 
+    <form action="{{ route('infrastruktur.index') }}" method="GET" class="filter-form">
+        <h3>Filter Data</h3>       
+        <div class="filter-row">
+            <div class="filter-group">
+                <label>Nama Laboratorium</label>
+                <input type="text" name="nama_lab" placeholder="Cari nama..." value="{{ request('nama_lab') }}">
+            </div>
+            <div class="filter-group">
+                <label>Lembaga</label>
+                <select name="lembaga">
+                    <option value="">-- Semua --</option>
+                    @foreach($list_lembaga as $l)
+                        <option value="{{ $l }}" {{ request('lembaga') == $l ? 'selected' : '' }}>{{ $l }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Jenis Akreditasi</label>
+                <select name="jenis_akreditasi">
+                    <option value="">-- Semua --</option>
+                    @foreach($list_akreditasi as $a)
+                        <option value="{{ $a }}" {{ request('jenis_akreditasi') == $a ? 'selected' : '' }}>{{ $a }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Terakreditasi</label>
+                <select name="status">
+                    <option value="">-- Semua --</option>
+                    <option value="ya" {{ request('status') == 'ya' ? 'selected' : '' }}>Ya</option>
+                    <option value="tidak" {{ request('status') == 'tidak' ? 'selected' : '' }}>Tidak</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Fasilitas</label>
+                <input type="text" name="fasilitas" placeholder="Cari fasilitas..." value="{{ request('fasilitas') }}">
+            </div>
+            <div class="filter-group">
+                <label>Lokasi</label>
+                <input type="text" name="lokasi" placeholder="Cari lokasi..." value="{{ request('lokasi') }}">
+            </div>
+        </div>
+        <div class="filter-actions">
+            <button type="submit" class="btn-submit">Terapkan Filter</button>
+            <a href="{{ route('infrastruktur.index') }}" class="btn-back">Reset</a>
+        </div>
+    </form>
+
     <div class="table-wrapper">
         <table>
         <thead>

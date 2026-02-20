@@ -7,10 +7,50 @@ use Illuminate\Http\Request;
 
 class InfrastrukturRisetController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $infrastruktur = InfrastrukturRiset::all();
-        return view('infrastruktur.index', compact('infrastruktur'));  
+        // Ambil data unique untuk dropdown
+        $list_lembaga = InfrastrukturRiset::select('lembaga')->distinct()->pluck('lembaga');
+        $list_akreditasi = InfrastrukturRiset::select('jenis_akreditasi')
+            ->whereNotNull('jenis_akreditasi')
+            ->distinct()
+            ->pluck('jenis_akreditasi');
+
+        // Query dasar
+        $query = InfrastrukturRiset::query();
+
+        // Filter: Nama Laboratorium
+        if ($request->filled('nama_lab')) {
+            $query->where('nama_laboratorium', 'LIKE', '%' . $request->nama_lab . '%');
+        }
+
+        // Filter: Fasilitas
+        if ($request->filled('fasilitas')) {
+            $query->where('fasilitas', 'LIKE', '%' . $request->fasilitas . '%');
+        }
+
+        // Filter: Lokasi
+        if ($request->filled('lokasi')) {
+            $query->where('lokasi', 'LIKE', '%' . $request->lokasi . '%');
+        }
+
+        // Filter Dropdown: Lembaga
+        if ($request->filled('lembaga')) {
+            $query->where('lembaga', $request->lembaga);
+        }
+
+        // Filter Dropdown: Jenis Akreditasi
+        if ($request->filled('jenis_akreditasi')) {
+            $query->where('jenis_akreditasi', $request->jenis_akreditasi);
+        }
+
+        // Filter Dropdown: Status Terakreditasi
+        if ($request->filled('status')) {
+            $query->where('terakreditasi', $request->status == 'ya' ? 1 : 0);
+        }
+
+        $infrastruktur = $query->latest()->get();
+        return view('infrastruktur.index', compact('infrastruktur', 'list_lembaga', 'list_akreditasi'));
     }
 
     public function create()

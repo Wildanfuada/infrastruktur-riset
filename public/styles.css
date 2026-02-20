@@ -15,16 +15,91 @@ body {
     color: #2c3e50;
     line-height: 1.6;
     min-height: 100vh;
-    padding: 30px 20px;
+    padding: 0;
 }
 
 .container {
-    max-width: 1100px;
+    max-width: 100%;
     margin: 0 auto;
     background: white;
     border-radius: 12px;
     padding: 35px;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* ==================== Navbar ==================== */
+.navbar {
+    background: #2c3e50;
+    height: 70px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    box-shadow: 0 2px 12px rgba(44, 62, 80, 0.1);
+    z-index: 10;
+}
+
+.navbar-brand {
+    color: #fff;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-right: auto;
+}
+
+.navbar-nav {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+.navbar-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    opacity: 0.85;
+    padding: 8px 0;
+    border-bottom: 3px solid transparent;
+    transition: opacity 0.2s, border-color 0.2s;
+}
+
+.navbar-nav a.active,
+.navbar-nav a:hover {
+    opacity: 1;
+    border-bottom: 3px solid #27ae60;
+}
+
+.main-content {
+    margin-top: 70px;
+    padding: 40px 30px 30px 30px;
+    min-height: calc(100vh - 70px);
+    background: #f8f9fa;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0 20px;
+    }
+
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
+
+    .navbar-nav {
+        gap: 20px;
+    }
+
+    .navbar-nav a {
+        font-size: 0.85rem;
+    }
+
+    .main-content {
+        padding: 20px 15px 20px 15px;
+    }
 }
 
 /* ==================== Typography ==================== */
@@ -95,6 +170,8 @@ h3 {
     background: #95a5a6;
     color: white;
     margin-left: 10px;
+    margin-top: 20px;
+    height: 38px;
 }
 
 .btn-back:hover {
@@ -193,6 +270,8 @@ tbody tr:last-child td {
 .btn-edit {
     background: #3498db;
     color: white;
+    height: 30px;
+    padding-top: 4px;
 }
 
 .btn-edit:hover {
@@ -203,6 +282,8 @@ tbody tr:last-child td {
 .btn-delete {
     background: #e74c3c;
     color: white;
+    height: 30px;
+    padding-top: 8px;
 }
 
 .btn-delete:hover {
@@ -294,6 +375,95 @@ strong {
     font-weight: 600;
 }
 
+/* ==================== Filter Form ==================== */
+.filter-form {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.filter-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 15px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-group label {
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #2c3e50;
+    font-size: 0.9rem;
+}
+
+.filter-group input[type="text"],
+.filter-group select {
+    padding: 8px 12px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    color: #2c3e50;
+    background: white;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.filter-group input[type="text"]:focus,
+.filter-group select:focus {
+    outline: none;
+    border-color: #2c3e50;
+    box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.1);
+}
+
+.filter-group input::placeholder {
+    color: #95a5a6;
+}
+
+.filter-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-actions .btn-submit,
+.filter-actions .btn-back {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.filter-actions .btn-submit {
+    background: #2c3e50;
+    color: white;
+}
+
+.filter-actions .btn-submit:hover {
+    background: #1a202c;
+    transform: translateY(-1px);
+}
+
+.filter-actions .btn-back {
+    background: #95a5a6;
+    color: white;
+}
+
+.filter-actions .btn-back:hover {
+    background: #7f8c8d;
+    transform: translateY(-1px);
+}
+
 /* ==================== Responsive ==================== */
 @media (max-width: 768px) {
     body {
@@ -304,6 +474,27 @@ strong {
         padding: 15px;
         border-radius: 8px;
         margin: 0 10px;
+    }
+
+    .filter-form {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .filter-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    .filter-actions {
+        flex-direction: column;
+    }
+
+    .filter-actions .btn-submit,
+    .filter-actions .btn-back {
+        width: 100%;
+        justify-content: center;
     }
 
     h2 {
