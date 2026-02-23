@@ -49,7 +49,8 @@ class InfrastrukturRisetController extends Controller
             $query->where('terakreditasi', $request->status == 'ya' ? 1 : 0);
         }
 
-        $infrastruktur = $query->latest()->get();
+        $infrastruktur = $query->latest()->paginate(10)->withQueryString();
+
         return view('infrastruktur.index', compact('infrastruktur', 'list_lembaga', 'list_akreditasi'));
     }
 

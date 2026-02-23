@@ -192,11 +192,8 @@ table {
     min-width: 600px;
 }
 
-thead {
+thead th {
     background: #ecf0f1;
-}
-
-th {
     text-align: left;
     padding: 15px;
     font-size: 0.85rem;

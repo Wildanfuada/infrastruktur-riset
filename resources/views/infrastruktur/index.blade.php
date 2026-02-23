@@ -60,6 +60,7 @@
         <table>
         <thead>
             <tr>
+                <th>No</th>
                 <th>Nama Laboratorium</th>
                 <th>Lembaga</th>
                 <th>Jenis Akreditasi</th>
@@ -74,6 +75,7 @@
         <tbody>
             @foreach($infrastruktur as $item)
             <tr>
+                <td>{{$infrastruktur->firstItem() + $loop->index}}</td>
                 <td><strong>{{ $item->nama_laboratorium }}</strong></td>
                 <td>{{ $item->lembaga }}</td>
                 <td>{{ $item->jenis_akreditasi ?? '-' }}</td>
@@ -102,6 +104,12 @@
             @endforeach
         </tbody>
     </table>
+        <div class="pagination-wrapper">
+            {{ $infrastruktur->links('pagination::simple-default') }}
+        </div>
+        <p>
+            Menampilkan {{ $infrastruktur->firstItem() }} sampai {{ $infrastruktur->lastItem() }} dari {{ $infrastruktur->total() }} data.
+        </p>
     </div>
 </div>
 @endsection
