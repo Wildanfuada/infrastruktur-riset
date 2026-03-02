@@ -104,7 +104,7 @@
             @endforeach
         </tbody>
     </table>
-        <div class="pagination-wrapper">
+        <div class="pagination">
             {{ $infrastruktur->links('pagination::simple-default') }}
         </div>
         <p>
