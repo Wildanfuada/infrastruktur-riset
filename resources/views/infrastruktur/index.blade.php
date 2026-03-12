@@ -92,6 +92,19 @@
                 <td class="muted">{{ $item->contact_person }}</td>
                 <td>
                     <div class="actions">
+                        <button class="btn btn-detail" type="button" 
+                            onclick="showModal(this)"
+                            data-nama="{{ $item->nama_laboratorium }}"
+                            data-lembaga="{{ $item->lembaga }}"
+                            data-akreditasi="{{ $item->terakreditasi ? 'Ya' : 'Tidak' }} ({{ $item->jenis_akreditasi ?? '-' }})"
+                            data-fasilitas="{{ $item->fasilitas }}"
+                            data-lokasi="{{ $item->lokasi }}"
+                            data-biaya="{{ $item->biaya_pengujian }}"
+                            data-contact="{{ $item->contact_person }}">
+                            Detail
+                        </button>
+                    </div>
+                    <div class ="actions">    
                         <a href="{{ route('infrastruktur.edit', $item->id) }}" class="btn btn-edit">Edit</a>
                         <form action="{{ route('infrastruktur.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                             @csrf
@@ -110,6 +123,21 @@
         <p>
             Menampilkan {{ $infrastruktur->firstItem() }} sampai {{ $infrastruktur->lastItem() }} dari {{ $infrastruktur->total() }} data.
         </p>
+    </div>
+</div>
+
+<div id="detailModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <button onclick="closeModal()" class="modal-close-btn" title="Tutup">×</button>
+        <h2 id="modalTitle">Detail Laboratorium</h2>
+        <hr>
+        <p><strong>Lembaga:</strong> <span id="modalLembaga"></span></p>
+        <p><strong>Terakreditasi:</strong> <span id="modalAkreditasi"></span></p>
+        <p><strong>Fasilitas:</strong></p>
+        <div id="modalFasilitas" style="background: #f4f4f4; padding: 10px; border-radius: 5px;"></div>
+        <p><strong>Lokasi:</strong> <span id="modalLokasi"></span></p>
+        <p><strong>Biaya Pengujian:</strong> <span id="modalBiaya"></span></p>
+        <p><strong>Contact Person:</strong> <span id="modalContact"></span></p>
     </div>
 </div>
 @endsection

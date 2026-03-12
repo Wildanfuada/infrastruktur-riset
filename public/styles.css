@@ -184,6 +184,47 @@ h3 {
     gap: 25px;
 }
 
+.btn-detail {
+    background: #27ae60;
+    color: white;
+    height: 30px;
+    width: 100%;
+    padding-top: 8px;
+    position : relative;
+    margin-bottom: 8px;
+}
+
+.btn-detail:hover {
+    background: #229954;
+    transform: translateY(-1px);
+}
+
+.modal-close-btn {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+    background: #ecf0f1;
+    color: #2c3e50;
+    font-size: 28px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    font-weight: 300;
+    line-height: 1;
+    z-index: 1001;
+}
+
+.modal-close-btn:hover {
+    background: #e74c3c;
+    color: white;
+    transform: rotate(90deg);
+}
+
 /* ==================== Table ==================== */
 .table-wrapper {
     width: 100%;
@@ -247,6 +288,53 @@ tbody tr:last-child td {
 .no {
     background: #fadbd8;
     color: #c0392b;
+}
+
+/* ==================== infrastruktur detail ==================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content {
+    position: relative;
+    background: white;
+    padding: 30px;
+    width: 85%;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.3s ease-in-out;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 /* ==================== Actions ==================== */

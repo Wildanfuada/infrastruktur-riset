@@ -20,4 +20,5 @@
         @yield('content')
     </div>
 </body>
+<script src="{{ asset('js/modal-detail.js') }}"></script>
 </html>
