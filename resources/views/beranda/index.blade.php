@@ -23,7 +23,7 @@
                     <p>Tidak Terakreditasi</p>
                 </div>
             </div>
-            <a href="{{ route('infrastruktur.index') }}" class="btn-add" style="margin-top: 24px; display:inline-block;">Lihat Daftar Infrastruktur</a>
+            <a href="{{ route('infrastruktur.map') }}" class="btn-add" style="margin-top: 24px; display:inline-block;">Jelajah Infrastruktur</a>
         </div>
 
         <!-- SDM Summary Card -->
@@ -43,7 +43,7 @@
                     <p>SDM Tidak Aktif</p>
                 </div>
             </div>
-            <a href="{{ route('sdm.index') }}" class="btn-add" style="margin-top: 24px; display:inline-block; background:#3498db;">Lihat Daftar SDM</a>
+            <a href="{{ route('sdm.map') }}" class="btn-add" style="margin-top: 24px; display:inline-block; background:#3498db;">Cari pakar/peneliti</a>
         </div>
     </div>
 </div>

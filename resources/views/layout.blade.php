@@ -13,10 +13,10 @@
         <div class="navbar-brand">GIS RISET JATENG</div>
         <div class="navbar-nav">
             <a href="{{ route('beranda.index') }}" class="{{ request()->routeIs('beranda.index') ? 'active' : '' }}">Beranda</a>
-            <a href="{{ route('infrastruktur.map') }}" class="{{ request()->routeIs('infrastruktur.map') ? 'active' : '' }}">Lokasi infrastruktur</a>
-            <a href="{{ route('sdm.map') }}" class="{{ request()->routeIs('sdm.map') ? 'active' : '' }}">Lokasi SDM</a>
-            <a href="{{ route('infrastruktur.index') }}" class="{{ request()->routeIs('infrastruktur.*') ? 'active' : '' }}">Infrastruktur</a>
-            <a href="{{ route('sdm.index') }}" class="{{ request()->routeIs('sdm.*') ? 'active' : '' }}">SDM</a>
+            <a href="{{ route('infrastruktur.map') }}" class="{{ request()->routeIs('infrastruktur.map') ? 'active' : '' }}">Infrastruktur</a>
+            <a href="{{ route('sdm.map') }}" class="{{ request()->routeIs('sdm.map') ? 'active' : '' }}">SDM</a>
+            <a href="{{ route('infrastruktur.index') }}" class="{{ request()->routeIs('infrastruktur.*') ? 'active' : '' }}">Data Infrastruktur</a>
+            <a href="{{ route('sdm.index') }}" class="{{ request()->routeIs('sdm.*') ? 'active' : '' }}">Data SDM</a>
         </div>
     </nav>
     <div>
