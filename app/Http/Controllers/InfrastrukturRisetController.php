@@ -70,6 +70,8 @@ class InfrastrukturRisetController extends Controller
             'lokasi' => 'required|string',
             'biaya_pengujian' => 'required|string', 
             'contact_person' => 'required|string',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
         ]);
 
         // Checkbox handling - convert ke boolean
@@ -95,6 +97,8 @@ class InfrastrukturRisetController extends Controller
             'lokasi' => 'required|string',
             'biaya_pengujian' => 'required|string', 
             'contact_person' => 'required|string',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
         ]);
 
         // Checkbox handling - convert ke boolean
@@ -108,5 +112,11 @@ class InfrastrukturRisetController extends Controller
     {
         $infrastruktur->delete();
         return redirect()->route('infrastruktur.index')->with('success', 'Data berhasil dihapus.');
+    }
+
+    public function indexmap()
+    {
+        $infrastruktur = InfrastrukturRiset::whereNotNull('latitude')->whereNotNull('longitude')->get();
+        return view('infrastruktur.map', compact('infrastruktur'));
     }
 }

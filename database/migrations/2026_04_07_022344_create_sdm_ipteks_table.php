@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('infrastruktur_risets', function (Blueprint $table) {
+        Schema::create('sdm_ipteks', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_laboratorium');
-            $table->string('lembaga');
-            $table->string('jenis_akreditasi')->nullable();
-            $table->boolean('terakreditasi')->default(false);
-            $table->text('fasilitas');
-            $table->string('lokasi');
-            $table->string('biaya_pengujian');
-            $table->string('contact_person');
+            $table->string('nama');
+            $table->string('laboratorium');
+            $table->string('kepakaran');
+            $table->string('instansi');
+            $table->string('email')->unique();
+            $table->string('kontak')->nullable();
             $table->decimal('latitude', 10, 7)->nullable();
             $table->decimal('longitude', 10, 7)->nullable();
             $table->timestamps();
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('infrastruktur_risets');
+        Schema::dropIfExists('sdm_ipteks');
     }
 };

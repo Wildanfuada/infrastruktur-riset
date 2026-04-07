@@ -7,6 +7,8 @@ function showModal(button) {
     const lokasi = button.getAttribute('data-lokasi');
     const biaya = button.getAttribute('data-biaya');
     const contact = button.getAttribute('data-contact');
+    const latitude = button.getAttribute('data-latitude');
+    const longitude = button.getAttribute('data-longitude');
 
     // Masukkan ke dalam elemen modal
     document.getElementById('modalTitle').innerText = nama;
@@ -16,6 +18,8 @@ function showModal(button) {
     document.getElementById('modalFasilitas').innerText = fasilitas;
     document.getElementById('modalBiaya').innerText = biaya;
     document.getElementById('modalContact').innerText = contact;
+    document.getElementById('modalLatitude').innerText = latitude;
+    document.getElementById('modalLongitude').innerText = longitude;
 
     // Tampilkan modal
     document.getElementById('detailModal').style.display = 'flex';

@@ -15,6 +15,8 @@ class InfrastrukturRiset extends Model
         'lokasi',
         'biaya_pengujian',
         'contact_person',
+        'latitude',
+        'longitude',
     ];
 
     // Opsional: Casting 'terakreditasi' agar otomatis menjadi boolean di PHP

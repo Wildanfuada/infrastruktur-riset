@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\InfrastrukturRiset;
-use App\Http\Controllers\SDMController;
+use App\Models\SDM;
 
-class DashboardController extends Controller
+class BerandaController extends Controller
 {
     public function index()
     {
         $totalInfrastruktur = InfrastrukturRiset::count();
         $terakreditasi = InfrastrukturRiset::where('terakreditasi', true)->count();
         $tidakTerakreditasi = $totalInfrastruktur - $terakreditasi;
-        return view('dashboard.index', compact('totalInfrastruktur', 'terakreditasi', 'tidakTerakreditasi'));
+        $totalSDM = SDM::count();
+        return view('beranda.index', compact('totalInfrastruktur', 'terakreditasi', 'tidakTerakreditasi', 'totalSDM'));
     }
 }
