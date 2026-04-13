@@ -1,10 +1,8 @@
 @extends('layout')
-
 @section('title', 'Beranda')
-
 @section('content')
 <div class="main-content">    
-    <h1>Beranda</h1>
+    <h1 class="title-sheet">Beranda</h1>
     <div class="dashboard-row" style="display: flex; gap: 32px; flex-wrap: wrap; margin-bottom: 32px;">
         <!-- Infrastruktur Riset Summary Card -->
         <div class="dashboard-card" style="flex: 1 1 350px; background: #f4f8fb; border-radius: 14px; box-shadow: 0 2px 8px rgba(44,62,80,0.07); padding: 32px 28px; min-width: 320px;">

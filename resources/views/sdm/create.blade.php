@@ -3,7 +3,7 @@
 @section('content')
 <div class="main-content">
     <div class="container">
-        <h1>Tambah Data SDM</h1>
+        <h1 class="title-sheet">Tambah Data SDM</h1>
         <form action="{{ route('sdm.store') }}" method="POST">
             @csrf
             <div class="form-group">

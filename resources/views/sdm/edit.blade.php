@@ -3,7 +3,7 @@
 @section('content')
 <div class="main-content">
     <div class="container">
-        <h1>Edit Data SDM</h1>
+        <h1 class="title-sheet">Edit Data SDM</h1>
         <form action="{{ route('sdm.update', $sdm->id) }}" method="POST">
             @csrf
             @method('PUT')

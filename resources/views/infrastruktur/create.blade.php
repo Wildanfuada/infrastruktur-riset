@@ -3,7 +3,7 @@
 @section('content')
 <div class="main-content">
     <div class="container">
-        <h1>Tambah Data Infrastruktur Riset</h1>
+        <h1 class="title-sheet">Tambah Data Infrastruktur Riset</h1>
         <p class="subtitle">Isikan data lengkap infrastruktur riset baru</p>
 
         <form action="{{ route('infrastruktur.store') }}" method="POST">

@@ -3,7 +3,7 @@
 @section('content')
 <div class="main-content">
     <div class="container">
-        <h1>Daftar SDM</h1>
+        <h1 class="title-sheet">Daftar SDM</h1>
         <a href="{{ route('sdm.create') }}" class="btn-add">+ Tambah Data</a>
         <div class="table-wrapper">
             <table>

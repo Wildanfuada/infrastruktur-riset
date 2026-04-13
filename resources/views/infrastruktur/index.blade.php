@@ -3,7 +3,7 @@
 @section('content')
 <div class="main-content">
     <div class="container">
-        <h1>Daftar Infrastruktur Riset</h1>
+        <h1 class="title-sheet">Daftar Infrastruktur Riset</h1>
 
         <a href="{{ route('infrastruktur.create') }}" class="btn-add">+ Tambah Data</a>
 

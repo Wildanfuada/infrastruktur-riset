@@ -449,6 +449,13 @@ h3 {
     font-size: 1.3rem;
 }
 
+.title-sheet {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-family: sans-serif;
+}
+
 .subtitle {
     font-size: 0.9rem;
     color: #718096;
@@ -517,7 +524,7 @@ h3 {
     color: white;
     height: 30px;
     width: 100%;
-    padding-top: 8px;
+    padding-top: 5px;
     position: relative;
     margin-bottom: 8px;
 }
@@ -689,7 +696,7 @@ tbody tr:last-child td {
     background: #3498db;
     color: white;
     height: 30px;
-    padding-top: 4px;
+    padding-top: 5px;
 }
 
 .btn-edit:hover {
@@ -701,7 +708,7 @@ tbody tr:last-child td {
     background: #e74c3c;
     color: white;
     height: 30px;
-    padding-top: 8px;
+    padding-top: 5px;
 }
 
 .btn-delete:hover {

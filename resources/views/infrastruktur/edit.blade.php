@@ -3,7 +3,7 @@
 @section('content')
 <div class="main-content">
     <div class="container">
-        <h1>Edit Data Infrastruktur Riset</h1>
+        <h1 class="title-sheet">Edit Data Infrastruktur Riset</h1>
         <p class="subtitle">Perbarui informasi infrastruktur riset</p>
 
         <form action="{{ route('infrastruktur.update', $infrastruktur->id) }}" method="POST">
