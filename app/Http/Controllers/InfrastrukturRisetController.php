@@ -114,7 +114,7 @@ class InfrastrukturRisetController extends Controller
         return redirect()->route('infrastruktur.index')->with('success', 'Data berhasil dihapus.');
     }
 
-    public function indexmap()
+    public function map()
     {
         $infrastruktur = InfrastrukturRiset::whereNotNull('latitude')->whereNotNull('longitude')->get();
         return view('infrastruktur.map', compact('infrastruktur'));

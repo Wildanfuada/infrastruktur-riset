@@ -20,8 +20,9 @@ class SDMController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $input = $request->validate([
             'nama' => 'required|string|max:255',
+            'alamat' => 'nullable|string|max:255',
             'laboratorium' => 'required|string|max:255',
             'kepakaran' => 'required|string|max:255',
             'instansi' => 'required|string|max:255',
@@ -31,7 +32,7 @@ class SDMController extends Controller
             'longitude' => 'nullable|numeric',
         ]);
 
-        SDM::create($validatedData);
+        SDM::create($input);
 
         return redirect()->route('sdm.index')->with('success', 'Data SDM berhasil ditambahkan.');
     }
@@ -43,19 +44,20 @@ class SDMController extends Controller
 
     public function update(Request $request, SDM $sdm)
     {
-        $validatedData = $request->validate([
+        $input = $request->validate([
             'nama' => 'required|string|max:255',
+            'alamat' => 'nullable|string|max:255',
             'laboratorium' => 'required|string|max:255',
             'kepakaran' => 'required|string|max:255',
             'instansi' => 'required|string|max:255',
-            'email' => 'required|email|unique:sdm_ipteks,email',
+            'email' => 'required|email|unique:sdm_ipteks,email,' . $sdm->id,
             'kontak' => 'nullable|string|max:255',
             'latitude' => 'nullable|numeric',
             'longitude' => 'nullable|numeric',
 
         ]);
 
-        $sdm->update($validatedData);
+        $sdm->update($input);
 
         return redirect()->route('sdm.index')->with('success', 'Data SDM berhasil diperbarui.');
     }
@@ -66,7 +68,7 @@ class SDMController extends Controller
         return redirect()->route('sdm.index')->with('success', 'Data SDM berhasil dihapus.');
     }
 
-    public function indexMap()
+    public function map()
     {
         $sdm = SDM::whereNotNull('latitude')->whereNotNull('longitude')->get();
         return view('sdm.map', compact('sdm'));

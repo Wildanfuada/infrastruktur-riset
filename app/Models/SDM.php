@@ -12,6 +12,7 @@ class SDM extends Model
 
     protected $fillable = [
         'nama',
+        'alamat',
         'laboratorium',
         'kepakaran',
         'instansi',

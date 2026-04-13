@@ -12,6 +12,10 @@
                 <input type="text" name="nama" id="nama" class="form-control" value="{{ old('nama', $sdm->nama) }}" required>
             </div>
             <div class="form-group">
+                <label for="alamat">Alamat:</label>
+                <input type="text" name="alamat" id="alamat" class="form-control" value="{{ old('alamat', $sdm->alamat) }}">
+            </div>
+            <div class="form-group">
                 <label for="laboratorium">laboratorium:</label>
                 <input type="text" name="laboratorium" id="laboratorium" class="form-control" value="{{ old('laboratorium', $sdm->laboratorium) }}" required>
             </div>
@@ -39,8 +43,10 @@
                 <label for="longitude">Longitude:</label>
                     <input type="text" name="longitude" id="longitude" class="form-control" value="{{ old('longitude', $sdm->longitude) }}">
             </div>
+            <div class="form-actions"> 
             <button type="submit" class="btn-submit">Perbarui Data</button>
                 <a href="{{ route('sdm.index') }}" class="btn-back">Kembali</a>
+            </div>
         </form>
     </div>
 </div>

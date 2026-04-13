@@ -92,7 +92,7 @@
                     <td>
                         <div class="actions">
                             <button class="btn btn-detail" type="button" 
-                                onclick="showModal(this)"
+                                onclick="showModalInfrastruktur(this)"
                                 data-nama="{{ $item->nama_laboratorium }}"
                                 data-lembaga="{{ $item->lembaga }}"
                                 data-akreditasi="{{ $item->terakreditasi ? 'Ya' : 'Tidak' }} ({{ $item->jenis_akreditasi ?? '-' }})"

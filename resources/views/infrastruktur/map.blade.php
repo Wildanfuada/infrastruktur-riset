@@ -44,8 +44,7 @@
                         >
                             <div class="location-name">{{ $item->nama_laboratorium ?? 'Nama Tidak Tersedia' }}</div>
                             <div class="location-coords">
-                                <div>Lat: <span class="coord-value">{{ $item->latitude ?? 'N/A' }}</span></div>
-                                <div>Lng: <span class="coord-value">{{ $item->longitude ?? 'N/A' }}</span></div>
+                                <div>Lokasi : <span class="coord-value">{{ $item->lokasi ?? 'N/A' }}</span></div>
                             </div>
                         </div>
                     @endforeach
@@ -57,6 +56,25 @@
             @endif
         </div>
     </div>
+
+    <!-- Detail Modal untuk Map -->
+    <div id="detailModalMap" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <button onclick="closeDetailModal()" class="modal-close-btn" title="Tutup">×</button>
+            <h2 id="mapModalTitle">Detail Laboratorium</h2>
+            <hr>
+            <p><strong>Lembaga:</strong> <span id="mapModalLembaga">-</span></p>
+            <p><strong>Jenis Akreditasi:</strong> <span id="mapModalAkreditasi">-</span></p>
+            <p><strong>Terakreditasi:</strong> <span id="mapModalTerakreditasi">-</span></p>
+            <p><strong>Fasilitas:</strong></p>
+            <div id="mapModalFasilitas" style="background: #f4f4f4; padding: 10px; border-radius: 5px; min-height: 60px;">-</div>
+            <p><strong>Lokasi:</strong> <span id="mapModalLokasi">-</span></p>
+            <p><strong>Biaya Pengujian:</strong> <span id="mapModalBiaya">-</span></p>
+            <p><strong>Contact Person:</strong> <span id="mapModalContact">-</span></p>
+            <p><strong>Latitude:</strong> <span id="mapModalLatitude">-</span></p>
+            <p><strong>Longitude:</strong> <span id="mapModalLongitude">-</span></p>
+        </div>
+    </div>
 </div>
 
 @endsection
@@ -66,9 +84,15 @@
     let mapInstance = null;
     let markersMap = {};
     let allMarkers = [];
+    let infrastrukturData = {};
 
     document.addEventListener('DOMContentLoaded', function () {
         const locations = @json($infrastruktur);
+
+        // Simpan data infrastruktur untuk akses detail
+        locations.forEach(item => {
+            infrastrukturData[item.nama_laboratorium] = item;
+        });
 
         // Inisialisasi Peta
         mapInstance = L.map('map', {
@@ -87,7 +111,8 @@
         const validLocations = locations.map(item => ({
             latitude: item.latitude,
             longitude: item.longitude,
-            nama_laboratorium: item.nama_laboratorium
+            nama_laboratorium: item.nama_laboratorium,
+            lokasi: item.lokasi
         })).filter(function (loc) {
             return loc.latitude !== null && loc.longitude !== null && loc.latitude !== '' && loc.longitude !== '';
         });
@@ -101,17 +126,23 @@
                 const marker = L.marker([lat, lng]).addTo(mapInstance);
                 
                 const popupContent = `
-                    <div style="min-width: 150px;">
+                    <div style="min-width: 200px;">
                         <strong style="font-size: 14px; color: #1f2937;">${loc.nama_laboratorium || 'Nama tidak tersedia'}</strong>
                         <hr style="margin: 8px 0; border: 0; border-top: 1px solid #e5e7eb;">
-                        <div style="font-size: 12px; color: #6b7280;">
-                            Lat: ${lat}<br>
-                            Lng: ${lng}
+                        <div style="font-size: 12px; color: #6b7280; margin-bottom: 10px;">
+                            Lokasi: ${loc.lokasi || '-'}
                         </div>
+                        <button onclick="showDetailModal('${loc.nama_laboratorium}')" style="width: 100%; padding: 6px 12px; background-color: #3b82f6; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 500;">Lihat Detail</button>
                     </div>
                 `;
                 
                 marker.bindPopup(popupContent);
+                
+                // Tambah event listener untuk marker
+                marker.on('click', function() {
+                    marker.openPopup();
+                });
+                
                 markersMap[loc.nama_laboratorium] = marker;
                 
                 return marker;
@@ -147,6 +178,45 @@
             }
         });
     }
+
+    // Fungsi untuk menampilkan detail modal dari marker
+    function showDetailModal(namaLaboratorium) {
+        const item = infrastrukturData[namaLaboratorium];
+        
+        if (!item) {
+            alert('Data tidak ditemukan');
+            return;
+        }
+
+        // Isi data modal
+        document.getElementById('mapModalTitle').innerText = item.nama_laboratorium || 'Detail Laboratorium';
+        document.getElementById('mapModalLembaga').innerText = item.lembaga || '-';
+        document.getElementById('mapModalAkreditasi').innerText = item.jenis_akreditasi || '-';
+        document.getElementById('mapModalTerakreditasi').innerText = item.terakreditasi ? 'Ya' : 'Tidak';
+        document.getElementById('mapModalFasilitas').innerText = item.fasilitas || '-';
+        document.getElementById('mapModalLokasi').innerText = item.lokasi || '-';
+        document.getElementById('mapModalBiaya').innerText = item.biaya_pengujian || '-';
+        document.getElementById('mapModalContact').innerText = item.contact_person || '-';
+        document.getElementById('mapModalLatitude').innerText = item.latitude || '-';
+        document.getElementById('mapModalLongitude').innerText = item.longitude || '-';
+
+        // Tampilkan modal
+        document.getElementById('detailModalMap').style.display = 'flex';
+    }
+
+    // Fungsi untuk menutup detail modal
+    function closeDetailModal() {
+        document.getElementById('detailModalMap').style.display = 'none';
+    }
+
+    // Tutup modal jika area luar kotak diklik
+    window.addEventListener('click', function(event) {
+        const modal = document.getElementById('detailModalMap');
+        if (event.target == modal) {
+            closeDetailModal();
+        }
+    });
+
 
     // Fungsi Mengarahkan Kamera saat Item Diklik
     function panToLocation(lat, lng, name) {

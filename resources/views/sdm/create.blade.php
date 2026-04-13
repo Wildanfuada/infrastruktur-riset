@@ -10,17 +10,21 @@
                 <label for="nama" class="required">Nama</label>
                 <input type="text" id="nama" name="nama" placeholder="Nama lengkap" required value="{{ old('nama') }}">
             </div>
+            <div>
+                <label for="alamat">Alamat</label>
+                <input type="text" id="alamat" name="alamat" placeholder="Alamat tempat tinggal atau bekerja" value="{{ old('alamat') }}">
+            </div>
             <div class="form-group">
                 <label for="laboratorium" class="required">laboratorium</label>
-                <input type="text" id="laboratorium" name="laboratorium" placeholder="Nama lembaga atau institusi" required value="{{ old('laboratorium') }}">
+                <input type="text" id="laboratorium" name="laboratorium" placeholder="Nama laboratorium" required value="{{ old('laboratorium') }}">
             </div>
             <div class="form-group">
                 <label for="kepakaran" class="required">kepakaran</label>
-                <input type="text" id="kepakaran" name="kepakaran" placeholder="Jabatan atau posisi" required value="{{ old('kepakaran') }}">
+                <input type="text" id="kepakaran" name="kepakaran" placeholder="Bidang keahlian atau spesialisasi" required value="{{ old('kepakaran') }}">
             </div>
             <div class="form-group">
                 <label for="instansi" class="required">Instansi</label>
-                <input type="text" id="instansi" name="instansi" placeholder="Bidang keahlian atau spesialisasi" required value="{{ old('bidang_keahlian') }}">
+                <input type="text" id="instansi" name="instansi" placeholder="Nama lembaga atau institusi" required value="{{ old('instansi') }}">
             </div>
             <div class="form-group">
                 <label for="email" class="required">Email</label>

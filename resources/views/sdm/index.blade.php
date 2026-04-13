@@ -11,6 +11,7 @@
                 <tr>
                     <th>No</th>
                     <th>Nama</th>
+                    <th>Alamat</th>
                     <th>Laboratorium</th>
                     <th>Kepakaran</th>
                     <th>Instansi</th>
@@ -23,7 +24,8 @@
                 @foreach($sdm as $item)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->nama }}</td>
+                    <td><strong>{{ $item->nama }}</strong></td>
+                    <td>{{ $item->alamat }}</td>
                     <td>{{ $item->laboratorium }}</td>
                     <td>{{ $item->kepakaran }}</td>
                     <td>{{ $item->instansi }}</td>
@@ -32,6 +34,21 @@
                     <td>
 
                         <div class ="actions">    
+                            <button class="btn btn-detail" type="button" 
+                                onclick="showModalSDM(this)"
+                                data-nama="{{ $item->nama }}"
+                                data-alamat="{{ $item->alamat }}"
+                                data-laboratorium="{{ $item->laboratorium }}"
+                                data-kepakaran="{{ $item->kepakaran }}"
+                                data-instansi="{{ $item->instansi }}"
+                                data-email="{{ $item->email }}"
+                                data-kontak="{{ $item->kontak }}"
+                                data-latitude="{{ $item->latitude ?? '-' }}"
+                                data-longitude="{{ $item->longitude ?? '-' }}">
+                                Detail
+                            </button>
+                        </div>
+                        <div class ="actions">
                             <a href="{{ route('sdm.edit', $item->id) }}" class="btn btn-edit">Edit</a>
                             <form action="{{ route('sdm.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                                 @csrf
@@ -57,10 +74,11 @@
         <div class="modal-content">
             <button onclick="closeModal()" class="modal-close-btn" title="Tutup">×</button>
             <h3 id="modalNama"></h3>
-            <p><strong>Laboratorium:</strong> <span id="modalLembaga"></span></p>
-            <p><strong>Kepakaran:</strong> <span id="modalJabatan"></span></p>
-            <p><strong>Instansi:</strong> <span id="modalBidang"></span></p>
-            <p><strong>Email:</strong> <span id="modalContact"></span></p>
+            <p><strong>Alamat:</strong> <span id="modalAlamat"></span></p>
+            <p><strong>Laboratorium:</strong> <span id="modalLaboratorium"></span></p>
+            <p><strong>Kepakaran:</strong> <span id="modalKepakaran"></span></p>
+            <p><strong>Instansi:</strong> <span id="modalInstansi"></span></p>
+            <p><strong>Email:</strong> <span id="modalEmail"></span></p>
             <p><strong>Kontak:</strong> <span id="modalContact"></span></p>
             <p><strong>Latitude:</strong> <span id="modalLatitude"></span></p>
             <p><strong>Longitude:</strong> <span id="modalLongitude"></span></p>

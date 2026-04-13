@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('sdm_ipteks', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->string('alamat')->nullable();
             $table->string('laboratorium');
             $table->string('kepakaran');
             $table->string('instansi');
