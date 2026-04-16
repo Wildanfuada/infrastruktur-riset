@@ -105,6 +105,17 @@
             minZoom: 7,
         }).addTo(mapInstance);
 
+        //variabel L.popup untuk menampilkan pesan jika tidak ada data koordinat
+         var popup = L.popup();
+        // Fungsi untuk menampilkan koordinat
+        function onMapClick(e) {
+            popup
+                .setLatLng(e.latlng)
+                .setContent("Koordinat: " + e.latlng.toString())
+                .openOn(mapInstance);
+        }
+        mapInstance.on('click', onMapClick);
+
         // Filter lokasi yang valid
         const validLocations = locations.map(item => ({
             latitude: item.latitude,

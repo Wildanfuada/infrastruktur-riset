@@ -64,6 +64,8 @@
                         required>{{ $infrastruktur->contact_person ?? '' }}</textarea>
             </div>
 
+            @include('partials.map-picker')
+
             <div class="form-group">
                 <label for="latitude">Latitude</label>
                 <input type="text" id="latitude" name="latitude" 

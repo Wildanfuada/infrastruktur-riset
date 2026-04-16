@@ -10,7 +10,7 @@
                 <label for="nama" class="required">Nama</label>
                 <input type="text" id="nama" name="nama" placeholder="Nama lengkap" required value="{{ old('nama') }}">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="alamat">Alamat</label>
                 <input type="text" id="alamat" name="alamat" placeholder="Alamat tempat tinggal atau bekerja" value="{{ old('alamat') }}">
             </div>
@@ -33,14 +33,15 @@
             <div class="form-group">
                 <label for="kontak" class="required">Kontak</label>
                 <input type="text" id="kontak" name="kontak" placeholder="Nomor telepon atau kontak person" required value="{{ old('kontak') }}">
+            </div>   
+            @include('partials.map-picker')        
+            <div class="form-group">
+                <label for="latitude">Latitude</label>
+                <input type="text" id="latitude" name="latitude" placeholder="Contoh: -6.200000" value="{{ old('latitude') }}" class="form-control">
             </div>
             <div class="form-group">
-                 <label for="latitude">Latitude</label>
-                 <input type="text" id="latitude" name="latitude" placeholder="Contoh: -6.200000" value="{{ old('latitude') }}">
-            </div>
-            <div class="form-group">
-                 <label for="longitude">Longitude</label>
-                 <input type="text" id="longitude" name="longitude" placeholder="Contoh: 106.816666" value="{{ old('longitude') }}">
+                <label for="longitude">Longitude</label>
+                <input type="text" id="longitude" name="longitude" placeholder="Contoh: 106.816666" value="{{ old('longitude') }}" class="form-control">
             </div>
             <div class="form-actions">
                  <button type="submit" class="btn-submit">Simpan</button>

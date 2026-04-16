@@ -35,6 +35,9 @@
                 <label for="kontak">Kontak:</label>
                 <input type="text" name="kontak" id="kontak" class="form-control" value="{{ old('kontak', $sdm->kontak) }}">
             </div>
+
+            @include('partials.map-picker')
+
             <div class="form-group">
                 <label for="latitude">Latitude:</label>
                 <input type="text" name="latitude" id="latitude" class="form-control" value="{{ old('latitude', $sdm->latitude) }}">
