@@ -48,7 +48,7 @@
             <div class="form-group">
                 <label for="lokasi" class="required">Lokasi</label>
                 <textarea id="lokasi" name="lokasi" 
-                        placeholder="Contoh: Jakarta, DKI Jakarta" required>{{ $infrastruktur->lokasi }}</textarea>
+                        placeholder="Contoh: Kota Semarang, Jawa Tengah" required>{{ $infrastruktur->lokasi }}</textarea>
             </div>
 
             <div class="form-group">

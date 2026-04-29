@@ -55,9 +55,6 @@ function initializeMap() {
                 document.getElementById('latitude').value = newLat.toFixed(6);
                 document.getElementById('longitude').value = newLng.toFixed(6);
             });
-
-            // Fokus ke marker
-            mapInstance.setView([lat, lng], 12);
         }
 
         //pencarian lokasi dengan geocoder
