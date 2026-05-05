@@ -24,8 +24,8 @@
                 <a href="{{ route('sdm.map') }}" class="{{ request()->routeIs('sdm.map') ? 'active' : '' }}">SDM</a>
                 
                 @auth
-                <a href="{{ route('infrastruktur.index') }}" class="{{ request()->routeIs('infrastruktur.*') ? 'active' : '' }}">Data Infrastruktur</a>
-                <a href="{{ route('sdm.index') }}" class="{{ request()->routeIs('sdm.*') ? 'active' : '' }}">Data SDM</a>
+                <a href="{{ route('infrastruktur.index') }}" class="{{ request()->routeIs('infrastruktur.index') ? 'active' : '' }}">Data Infrastruktur</a>
+                <a href="{{ route('sdm.index') }}" class="{{ request()->routeIs('sdm.index') ? 'active' : '' }}">Data SDM</a>
 
                 <div class="navbar-user">
                     <div class="user-dropdown" @click="open = !open">
@@ -78,8 +78,8 @@
 
                 @auth
                 <div class="mobile-divider"></div>
-                <a href="{{ route('infrastruktur.index') }}" class="mobile-link {{ request()->routeIs('infrastruktur.*') ? 'active' : '' }}" @click="open = false">Data Infrastruktur</a>
-                <a href="{{ route('sdm.index') }}" class="mobile-link {{ request()->routeIs('sdm.*') ? 'active' : '' }}" @click="open = false">Data SDM</a>
+                <a href="{{ route('infrastruktur.index') }}" class="mobile-link {{ request()->routeIs('infrastruktur.index') ? 'active' : '' }}" @click="open = false">Data Infrastruktur</a>
+                <a href="{{ route('sdm.index') }}" class="mobile-link {{ request()->routeIs('sdm.index') ? 'active' : '' }}" @click="open = false">Data SDM</a>
 
                 <div class="mobile-divider"></div>
                 <div class="mobile-user-section">
