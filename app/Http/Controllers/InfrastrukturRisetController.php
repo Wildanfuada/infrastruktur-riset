@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\InfrastrukturRiset;
 use Illuminate\Http\Request;
+use App\Imports\InfrastrukturImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class InfrastrukturRisetController extends Controller
 {
@@ -119,4 +121,23 @@ class InfrastrukturRisetController extends Controller
         $infrastruktur = InfrastrukturRiset::whereNotNull('latitude')->whereNotNull('longitude')->get();
         return view('infrastruktur.map', compact('infrastruktur'));
     }
+
+    public function import(Request $request)
+{
+    // 1. CEK APAKAH FILE MASUK (Jika halaman jadi hitam dan ada tulisan file, berarti masuk)
+    // Hapus tanda // di bawah ini untuk mengetes:
+    // dd($request->file('file'));
+
+    $request->validate([
+        'file' => 'required|mimes:xlsx,xls,csv', 
+    ]);
+
+    try {
+        Excel::import(new InfrastrukturImport, $request->file('file'));
+        return redirect()->route('infrastruktur.index')->with('success', 'Data berhasil disimpan.');
+    } catch (\Exception $e) {
+        // 2. CEK ERROR ASLI (Tampilkan error paksa di layar)
+        dd("GAGAL KARENA: " . $e->getMessage()); 
+    }
+}
 }

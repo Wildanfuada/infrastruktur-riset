@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SDM;
+use App\Imports\SDMImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SDMController extends Controller
 {
@@ -74,4 +76,17 @@ class SDMController extends Controller
         return view('sdm.map', compact('sdm'));
     }
 
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls',
+        ]);
+
+        try {
+            Excel::import(new \App\Imports\SDMImport, $request->file('file'));
+            return redirect()->route('sdm.index')->with('success', 'Data SDM berhasil diimpor.');
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+    }
 }

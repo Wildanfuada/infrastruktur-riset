@@ -5,6 +5,11 @@
     <div class="container">
         <h1 class="title-sheet">Daftar SDM</h1>
         <a href="{{ route('sdm.create') }}" class="btn-add">+ Tambah Data</a>
+        <form action="{{ route('sdm.import') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <input type="file" name="file" accept=".xlsx, .xls" required>
+            <button type="submit" class="btn-import">Import Excel</button>
+        </form>
         <div class="table-wrapper">
             <table>
             <thead>

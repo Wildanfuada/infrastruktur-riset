@@ -6,6 +6,11 @@
         <h1 class="title-sheet">Daftar Infrastruktur Riset</h1>
 
         <a href="{{ route('infrastruktur.create') }}" class="btn-add">+ Tambah Data</a>
+        <form action="{{ route('infrastruktur.import') }}" method="POST" enctype="multipart/form-data" class="import-form">
+            @csrf
+            <input type="file" name="file" accept=".xlsx, .xls" required>
+            <button type="submit" class="btn-import">Import Excel</button>
+        </form>
 
         <form action="{{ route('infrastruktur.index') }}" method="GET" class="filter-form">
             <h3>Filter Data</h3>       
