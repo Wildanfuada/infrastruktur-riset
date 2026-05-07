@@ -31,6 +31,34 @@
             >
         </div>
 
+        <div class="category-filter-container">
+            <div class="category-dropdown-wrapper">
+                <button class="category-dropdown-btn" onclick="toggleExpertiseDropdown()">
+                    <span class="filter-icon">⊕</span>
+                    <span class="filter-label">Kepakaran</span>
+                    <span class="dropdown-arrow">▼</span>
+                </button>
+                <div class="category-dropdown-menu" id="expertiseDropdownMenu">
+                    <div class="category-option" data-expertise="all" onclick="filterByExpertise('all')">
+                        <span class="category-name">Semua Kepakaran</span>
+                        <span class="category-badge" id="badge-all">{{ $sdm->count() }}</span>
+                    </div>
+                    @php
+                        $expertises = $sdm->pluck('kepakaran')->unique()->filter()->values();
+                    @endphp
+                    @foreach($expertises as $expertise)
+                        @php
+                            $count = $sdm->where('kepakaran', $expertise)->count();
+                        @endphp
+                        <div class="category-option" data-expertise="{{ strtolower(str_replace(' ', '-', $expertise)) }}" onclick="filterByExpertise('{{ strtolower(str_replace(' ', '-', $expertise)) }}')">
+                            <span class="category-name">{{ $expertise }}</span>
+                            <span class="category-badge" id="badge-{{ strtolower(str_replace(' ', '-', $expertise)) }}">{{ $count }}</span>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
         <div class="location-list-container">
             <h3 class="location-list-title">Daftar SDM</h3>
             
@@ -40,8 +68,14 @@
                         <div
                             class="location-item"
                             data-name="{{ strtolower($item->nama ?? '') }}"
-                            onclick="panToLocation({{ $item->latitude ?? 0 }}, {{ $item->longitude ?? 0 }}, '{{ addslashes($item->nama ?? '') }}')">
+                            data-expertise="{{ strtolower(str_replace(' ', '-', $item->kepakaran ?? 'uncategorized')) }}"
+                            data-marker-name="{{ addslashes($item->nama ?? '') }}"
+                            onclick="panToLocation({{ $item->latitude ?? 0 }}, {{ $item->longitude ?? 0 }}, '{{ addslashes($item->nama ?? '') }}')"
+                        >
                             <div class="location-name">{{ $item->nama ?? 'Nama Tidak Tersedia' }}</div>
+                            @if($item->kepakaran)
+                                <div class="location-category">{{ $item->kepakaran }}</div>
+                            @endif
                             <div class="location-coords">
                                 <div>Alamat: <span class="coord-value">{{ $item->alamat ?? 'N/A' }}</span></div>
                             </div>
@@ -121,7 +155,8 @@
             latitude: item.latitude,
             longitude: item.longitude,
             nama: item.nama,
-            alamat: item.alamat
+            alamat: item.alamat,
+            kepakaran: item.kepakaran
         })).filter(function (loc) {
             return loc.latitude !== null && loc.longitude !== null && loc.latitude !== '' && loc.longitude !== '';
         });
@@ -133,6 +168,7 @@
                 const lng = parseFloat(loc.longitude);
                 
                 const marker = L.marker([lat, lng]).addTo(mapInstance);
+                marker.kepakaran = loc.kepakaran; // Store expertise for filtering
                 
                 const popupContent = `
                     <div style="min-width: 200px;">
@@ -172,21 +208,99 @@
         }
     });
 
-    // Fungsi Pencarian Sidebar
+    // Fungsi Pencarian dan Filter Sidebar
     function filterLocations() {
         const input = document.getElementById('searchInput');
         const filter = input.value.toLowerCase();
         const items = document.querySelectorAll('.location-item');
+        const currentExpertise = document.querySelector('.category-option.active')?.getAttribute('data-expertise') || 'all';
 
         items.forEach(function (item) {
             const name = item.getAttribute('data-name');
-            if (name.includes(filter)) {
+            const expertise = item.getAttribute('data-expertise');
+            const matchesSearch = name.includes(filter);
+            const matchesExpertise = currentExpertise === 'all' || expertise === currentExpertise;
+
+            if (matchesSearch && matchesExpertise) {
                 item.style.display = 'block';
             } else {
                 item.style.display = 'none';
             }
         });
+
+        updateMarkerVisibility(currentExpertise, filter);
     }
+
+    // Fungsi Toggle Dropdown Kepakaran
+    function toggleExpertiseDropdown() {
+        const menu = document.getElementById('expertiseDropdownMenu');
+        menu.classList.toggle('active');
+    }
+
+    // Fungsi Filter by Expertise
+    function filterByExpertise(expertise) {
+        const items = document.querySelectorAll('.location-item');
+        const options = document.querySelectorAll('.category-option');
+        const input = document.getElementById('searchInput');
+        const searchFilter = input.value.toLowerCase();
+
+        // Update active state
+        options.forEach(opt => opt.classList.remove('active'));
+        document.querySelector(`.category-option[data-expertise="${expertise}"]`)?.classList.add('active');
+
+        // Filter items
+        items.forEach(function (item) {
+            const name = item.getAttribute('data-name');
+            const itemExpertise = item.getAttribute('data-expertise');
+            const matchesSearch = name.includes(searchFilter);
+            const matchesExpertise = expertise === 'all' || itemExpertise === expertise;
+
+            if (matchesSearch && matchesExpertise) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        // Update marker visibility
+        updateMarkerVisibility(expertise, searchFilter);
+
+        // Close dropdown after selection
+        document.getElementById('expertiseDropdownMenu').classList.remove('active');
+    }
+
+    // Fungsi Update Marker Visibility
+    function updateMarkerVisibility(expertise, searchFilter) {
+        allMarkers.forEach(function(marker) {
+            const markerName = Object.keys(markersMap).find(key => markersMap[key] === marker);
+            if (!markerName) return;
+
+            const markerExpertise = marker.kepakaran ? strtolower(marker.kepakaran.replace(/ /g, '-')) : 'uncategorized';
+            const matchesExpertise = expertise === 'all' || markerExpertise === expertise;
+            const matchesSearch = markerName.toLowerCase().includes(searchFilter);
+
+            if (matchesExpertise && matchesSearch) {
+                marker.setOpacity(1);
+                marker._icon.style.filter = 'none';
+            } else {
+                marker.setOpacity(0.3);
+                marker._icon.style.filter = 'grayscale(100%)';
+            }
+        });
+    }
+
+    // Fungsi helper untuk strtolower
+    function strtolower(str) {
+        return str.toLowerCase();
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('expertiseDropdownMenu');
+        if (!event.target.closest('.category-dropdown-wrapper')) {
+            dropdown.classList.remove('active');
+        }
+    });
 
     // Fungsi untuk menampilkan detail modal dari marker
     function showDetailModal(nama) {

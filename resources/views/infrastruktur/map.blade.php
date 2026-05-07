@@ -31,6 +31,34 @@
             >
         </div>
 
+        <div class="category-filter-container">
+            <div class="category-dropdown-wrapper">
+                <button class="category-dropdown-btn" onclick="toggleCategoryDropdown()">
+                    <span class="filter-icon">⊕</span>
+                    <span class="filter-label">Kategori</span>
+                    <span class="dropdown-arrow">▼</span>
+                </button>
+                <div class="category-dropdown-menu" id="categoryDropdownMenu">
+                    <div class="category-option" data-category="all" onclick="filterByCategory('all')">
+                        <span class="category-name">Semua Kategori</span>
+                        <span class="category-badge" id="badge-all">{{ $infrastruktur->count() }}</span>
+                    </div>
+                    @php
+                        $categories = $infrastruktur->pluck('jenis_akreditasi')->unique()->filter()->values();
+                    @endphp
+                    @foreach($categories as $category)
+                        @php
+                            $count = $infrastruktur->where('jenis_akreditasi', $category)->count();
+                        @endphp
+                        <div class="category-option" data-category="{{ strtolower(str_replace(' ', '-', $category)) }}" onclick="filterByCategory('{{ strtolower(str_replace(' ', '-', $category)) }}')">
+                            <span class="category-name">{{ $category }}</span>
+                            <span class="category-badge" id="badge-{{ strtolower(str_replace(' ', '-', $category)) }}">{{ $count }}</span>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
         <div class="location-list-container">
             <h3 class="location-list-title">Daftar Laboratorium</h3>
             
@@ -40,9 +68,13 @@
                         <div
                             class="location-item"
                             data-name="{{ strtolower($item->nama_laboratorium ?? '') }}"
+                            data-category="{{ strtolower(str_replace(' ', '-', $item->jenis_akreditasi ?? 'uncategorized')) }}"
                             onclick="panToLocation({{ $item->latitude ?? 0 }}, {{ $item->longitude ?? 0 }}, '{{ addslashes($item->nama_laboratorium ?? '') }}')"
                         >
                             <div class="location-name">{{ $item->nama_laboratorium ?? 'Nama Tidak Tersedia' }}</div>
+                            @if($item->jenis_akreditasi)
+                                <div class="location-category">{{ $item->jenis_akreditasi }}</div>
+                            @endif
                             <div class="location-coords">
                                 <div>Lokasi : <span class="coord-value">{{ $item->lokasi ?? 'N/A' }}</span></div>
                             </div>
@@ -179,16 +211,66 @@
         const input = document.getElementById('searchInput');
         const filter = input.value.toLowerCase();
         const items = document.querySelectorAll('.location-item');
+        const currentCategory = document.querySelector('.category-option.active')?.getAttribute('data-category') || 'all';
 
         items.forEach(function (item) {
             const name = item.getAttribute('data-name');
-            if (name.includes(filter)) {
+            const category = item.getAttribute('data-category');
+            const matchesSearch = name.includes(filter);
+            const matchesCategory = currentCategory === 'all' || category === currentCategory;
+
+            if (matchesSearch && matchesCategory) {
                 item.style.display = 'block';
             } else {
                 item.style.display = 'none';
             }
         });
     }
+
+    // Fungsi Toggle Dropdown Kategori
+    function toggleCategoryDropdown() {
+        const menu = document.getElementById('categoryDropdownMenu');
+        menu.classList.toggle('active');
+    }
+
+    // Fungsi Filter by Category
+    function filterByCategory(category) {
+        const items = document.querySelectorAll('.location-item');
+        const options = document.querySelectorAll('.category-option');
+
+        // Update active state
+        options.forEach(opt => opt.classList.remove('active'));
+        document.querySelector(`.category-option[data-category="${category}"]`)?.classList.add('active');
+
+        // Filter items
+        const input = document.getElementById('searchInput');
+        const searchFilter = input.value.toLowerCase();
+
+        items.forEach(function (item) {
+            const name = item.getAttribute('data-name');
+            const itemCategory = item.getAttribute('data-category');
+            const matchesSearch = name.includes(searchFilter);
+            const matchesCategory = category === 'all' || itemCategory === category;
+
+            if (matchesSearch && matchesCategory) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        // Close dropdown after selection
+        document.getElementById('categoryDropdownMenu').classList.remove('active');
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('categoryDropdownMenu');
+        const btn = document.querySelector('.category-dropdown-btn');
+        if (!event.target.closest('.category-dropdown-wrapper')) {
+            dropdown.classList.remove('active');
+        }
+    });
 
     // Fungsi untuk menampilkan detail modal dari marker
     function showDetailModal(namaLaboratorium) {
