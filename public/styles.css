@@ -70,6 +70,18 @@ body.menu-open {
     letter-spacing: -0.5px;
 }
 
+.alert-info {
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(14, 165, 233, 0.05) 100%);
+    border: 1px solid rgba(14, 165, 233, 0.3);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    color: var(--primary-navy);
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
 /* Dashboard Grid */
 .dashboard-row {
     display: grid;

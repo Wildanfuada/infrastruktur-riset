@@ -27,5 +27,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('infrastruktur', InfrastrukturRisetController::class)->except(['show']);
     Route::resource('sdm', SDMController::class)->except(['show']);
     Route::post('/infrastruktur/import', [InfrastrukturRisetController::class, 'import'])->name('infrastruktur.import');
+    Route::get('/infrastruktur/export', [InfrastrukturRisetController::class, 'export'])->name('infrastruktur.export');
     Route::post('/sdm/import', [SDMController::class, 'import'])->name('sdm.import');
+    Route::get('/sdm/export', [SDMController::class, 'export'])->name('sdm.export');
 });

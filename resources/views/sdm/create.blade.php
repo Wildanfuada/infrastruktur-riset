@@ -4,6 +4,11 @@
 <div class="main-content">
     <div class="container">
         <h1 class="title-sheet">Tambah Data SDM</h1>
+        <form action="{{ route('sdm.import') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <input type="file" name="file" accept=".xlsx, .xls" required>
+            <button type="submit" class="btn-import">Import Excel</button>
+        </form>
         <form action="{{ route('sdm.store') }}" method="POST">
             @csrf
             <div class="form-group">

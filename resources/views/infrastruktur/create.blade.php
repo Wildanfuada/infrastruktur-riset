@@ -4,6 +4,13 @@
 <div class="main-content">
     <div class="container">
         <h1 class="title-sheet">Tambah Data Infrastruktur Riset</h1>
+
+        <form action="{{ route('infrastruktur.import') }}" method="POST" enctype="multipart/form-data" class="import-form">
+            @csrf
+            <input type="file" name="file" accept=".xlsx, .xls" required>
+            <button type="submit" class="btn-import">Import Excel</button>
+        </form>
+
         <p class="subtitle">Isikan data lengkap infrastruktur riset baru</p>
 
         <form action="{{ route('infrastruktur.store') }}" method="POST">

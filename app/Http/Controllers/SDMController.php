@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\SDM;
 use App\Imports\SDMImport;
+use App\Exports\SDMExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class SDMController extends Controller
@@ -88,5 +89,11 @@ class SDMController extends Controller
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
+    }
+
+    public function export()
+    {
+        $filename = 'sdm_ipteks_' . date('Ymd_His') . '.xlsx';
+        return Excel::download(new \App\Exports\SDMExport, $filename);
     }
 }

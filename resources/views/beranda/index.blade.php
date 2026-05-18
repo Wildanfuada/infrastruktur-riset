@@ -4,6 +4,14 @@
 <div class="main-content">    
     <h1 class="title-sheet">Dashboard GIS</h1>
     
+    <div class="alert-info">
+        <p>Selamat datang di GIS Riset Jateng, platform inovatif yang memetakan potensi riset dan inovasi di Jawa Tengah.</p>
+        <p>Pemerintah Provinsi Jawa Tengah menghadirkan GIS Riset Jateng sebagai platform digital untuk memetakan seluruh potensi riset dan inovasi daerah.</p>
+        <p>Di dalam portal ini, data sebaran infrastruktur riset beserta status akreditasinya disatukan dengan profil kompetensi para peneliti serta tenaga ahli (SDM Iptek).</p>
+        <p>Melalui visualisasi yang transparan dan akurat, dashboard ini berfungsi memudahkan akses informasi sekaligus menjadi jembatan kolaborasi antara akademisi, industri,
+             dan pemerintah demi mendorong kemajuan iptek di Jawa Tengah.</p>
+    </div>
+
     <div class="dashboard-row">
         <!-- Infrastruktur Riset Summary Card -->
         <div class="dashboard-card">
@@ -20,10 +28,6 @@
                 <div class="summary-item emerald">
                     <h3>{{ $terakreditasi }}</h3>
                     <p>Terakreditasi</p>
-                </div>
-                <div class="summary-item danger">
-                    <h3>{{ $tidakTerakreditasi }}</h3>
-                    <p>Belum Terakreditasi</p>
                 </div>
             </div>
             
