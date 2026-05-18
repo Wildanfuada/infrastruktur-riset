@@ -397,5 +397,3 @@ Project ini dilisensikan di bawah MIT License. Silakan lihat file LICENSE untuk 
 ---
 
 **Terima kasih telah menggunakan Sistem Manajemen Infrastruktur Riset dan SDM IPTEKS** 🙏
-
-</div>-dan-sdm
