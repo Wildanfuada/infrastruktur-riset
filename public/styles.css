@@ -78,7 +78,7 @@ body.menu-open {
     margin-bottom: 30px;
     color: var(--primary-navy);
     font-size: 1rem;
-    line-height: 1.5;
+    line-height: 1.6;
     text-align: center;
 }
 
@@ -610,7 +610,7 @@ h3 {
     font-size: 2rem;
     color: #0f172a;
     margin-bottom: 24px;
-    font-family: sans-serif;
+    font-family: 'inter', sans-serif;
     font-weight: 700;
     letter-spacing: -0.5px;
 }
@@ -1341,7 +1341,7 @@ strong {
 }
 
 .coord-value {
-    font-family: monospace;
+    font-family: monospace, sans-serif;
     color: #0ea5e9;
     font-weight: 500;
 }
