@@ -2,11 +2,11 @@
 @section('title', 'Beranda')
 @section('content')
 <div class="main-content">    
-    <h1 class="title-sheet">Dashboard GIS</h1>
+    <h1 class="title-sheet">Beranda</h1>
     
     <div class="alert-info">
-        <p>Selamat datang di GIS Riset Jateng, platform inovatif yang memetakan potensi riset dan inovasi di Jawa Tengah.</p>
-        <p>Pemerintah Provinsi Jawa Tengah menghadirkan GIS Riset Jateng sebagai platform digital untuk memetakan seluruh potensi riset dan inovasi daerah.</p>
+        <p>Selamat datang di Sistem Informasi Geografis Riset Jateng, platform inovatif yang memetakan potensi riset dan inovasi di Jawa Tengah.</p>
+        <p>Pemerintah Provinsi Jawa Tengah menghadirkan SIG Riset Jateng sebagai platform digital untuk memetakan seluruh potensi riset dan inovasi daerah.</p>
         <p>Di dalam portal ini, data sebaran infrastruktur riset beserta status akreditasinya disatukan dengan profil kompetensi para peneliti serta tenaga ahli (SDM Iptek).</p>
         <p>Melalui visualisasi yang transparan dan akurat, dashboard ini berfungsi memudahkan akses informasi sekaligus menjadi jembatan kolaborasi antara akademisi, industri,
              dan pemerintah demi mendorong kemajuan iptek di Jawa Tengah.</p>
@@ -41,7 +41,7 @@
         <div class="dashboard-card">
             <div style="display: flex; align-items: center; margin-bottom: 28px;">
                 <div class="icon-box emerald">👥</div>
-                <h2>SDM Ipteks</h2>
+                <h2>SDM Iptek</h2>
             </div>
             
             <div class="summary">

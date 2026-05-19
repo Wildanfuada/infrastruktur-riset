@@ -17,15 +17,15 @@
          class="w-full" 
          :style="open && 'overflow: hidden'">
         <nav class="navbar">
-            <div class="navbar-brand">GIS RISET JATENG</div>
+            <div class="navbar-brand">SIG RISET JATENG</div>
             <div class="navbar-nav">
                 <a href="{{ route('beranda.index') }}" class="{{ request()->routeIs('beranda.index') ? 'active' : '' }}">Beranda</a>
                 <a href="{{ route('infrastruktur.map') }}" class="{{ request()->routeIs('infrastruktur.map') ? 'active' : '' }}">Infrastruktur</a>
                 <a href="{{ route('sdm.map') }}" class="{{ request()->routeIs('sdm.map') ? 'active' : '' }}">SDM</a>
                 
                 @auth
-                <a href="{{ route('infrastruktur.index') }}" class="{{ request()->routeIs('infrastruktur.index') ? 'active' : '' }}">Data Infrastruktur</a>
-                <a href="{{ route('sdm.index') }}" class="{{ request()->routeIs('sdm.index') ? 'active' : '' }}">Data SDM</a>
+                <a href="{{ route('infrastruktur.index') }}" class="{{ request()->routeIs('infrastruktur.index','infrastruktur.create','infrastruktur.edit') ? 'active' : '' }}">Data Infrastruktur</a>
+                <a href="{{ route('sdm.index') }}" class="{{ request()->routeIs('sdm.index','sdm.create','sdm.edit') ? 'active' : '' }}">Data SDM</a>
 
                 <div class="navbar-user">
                     <div class="user-dropdown" @click="open = !open">

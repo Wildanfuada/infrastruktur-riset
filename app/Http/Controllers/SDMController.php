@@ -93,7 +93,7 @@ class SDMController extends Controller
 
     public function export()
     {
-        $filename = 'sdm_ipteks_' . date('Ymd_His') . '.xlsx';
+        $filename = 'sdm_iptek_' . date('Ymd_His') . '.xlsx';
         return Excel::download(new \App\Exports\SDMExport, $filename);
     }
 }
