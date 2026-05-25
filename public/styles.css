@@ -189,7 +189,7 @@ body.menu-open {
 
 /* ==================== Navbar ==================== */
 .navbar {
-    background: #0f172a;
+    background: #ffffff;
     height: 70px;
     position: fixed;
     top: 0;
@@ -204,14 +204,13 @@ body.menu-open {
 }
 
 .navbar-brand {
-    color: #fff;
+    color: #000000;
     font-size: 1.35rem;
     font-weight: 700;
     letter-spacing: 0.5px;
     margin-right: auto;
-    background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: #000000;
     background-clip: text;
 }
 
@@ -222,7 +221,7 @@ body.menu-open {
 }
 
 .navbar-nav a {
-    color: #cbd5e1;
+    color: #000000;
     text-decoration: none;
     font-weight: 500;
     font-size: 0.95rem;
@@ -241,9 +240,11 @@ body.menu-open {
 }
 
 /* ==================== Navbar User Dropdown ==================== */
-.navbar-user {
+.navbar-user {  
     margin-left: auto;
+    padding-bottom: 6px;
     position: relative;
+    -webkit-text-fill-color: #000000;
 }
 
 .user-dropdown {
@@ -319,7 +320,7 @@ body.menu-open {
 }
 
 .navbar-nav-guest a {
-    color: #fff;
+    color: #000000;
     text-decoration: none;
     font-weight: 500;
     font-size: 0.95rem;
@@ -331,6 +332,8 @@ body.menu-open {
 
 .navbar-nav-guest a:hover {
     background-color: rgba(255, 255, 255, 0.1);
+    color: #0ea5e9;
+    border-bottom: 2px solid #0ea5e9;
 }
 
 /* ==================== Navbar Toggle (Mobile) ==================== */
@@ -338,7 +341,7 @@ body.menu-open {
     display: none;
     background: none;
     border: none;
-    color: #fff;
+    color: #000000;
     width: 32px;
     height: 32px;
     cursor: pointer;
